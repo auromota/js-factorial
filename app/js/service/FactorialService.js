@@ -2,7 +2,7 @@ var FactorialService = (function () {
 
     var _results = [1, 1];
 
-    function isNumberValid(number) {
+    function _isNumberValid(number) {
        if(!isNaN(number)) {
             number = parseInt(number);
             if(number >= 0) return true;
@@ -12,7 +12,7 @@ var FactorialService = (function () {
     }
     
     function calculate(number) {
-        if(!isNumberValid(number)) return null;
+        if(!_isNumberValid(number)) return null;
         while(number >= _results.length) {
             _results.push(_results.length * calculate(_results.length - 1));
         }
@@ -21,8 +21,7 @@ var FactorialService = (function () {
 
     //public api
     return {
-        "calculate": calculate,
-        "isNumberValid": isNumberValid
+        "calculate": calculate
     }
 
 })();
