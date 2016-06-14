@@ -2,14 +2,17 @@ var FactorialService = (function () {
 
     var _results = [1, 1];
 
-    function _isNumberValid(number) {
-        return (number !== undefined)
-            && (number > -1)
-            && (typeof(number) !== 'string');
+    function isNumberValid(number) {
+       if(!isNaN(number)) {
+            number = parseInt(number);
+            if(number >= 0) return true;
+            return false;
+        }
+        return false;
     }
     
     function calculate(number) {
-        if(!_isNumberValid(number)) return null;
+        if(!isNumberValid(number)) return null;
         while(number >= _results.length) {
             _results.push(_results.length * calculate(_results.length - 1));
         }
@@ -18,7 +21,8 @@ var FactorialService = (function () {
 
     //public api
     return {
-        "calculate": calculate
+        "calculate": calculate,
+        "isNumberValid": isNumberValid
     }
 
 })();
